@@ -1,6 +1,7 @@
 package com.pixellu.helpers;
 
 import com.codeborne.selenide.Configuration;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
@@ -22,6 +23,7 @@ public final class DriverFactory {
 //        System.setProperty("webdriver.chrome.driver",
 //                "D:\\Users\\AleksanDR\\IdeaProjects\\md\\frontend2\\chrome\\chromedriver-win64\\chromedriver.exe");
 //        Configuration.startMaximized = true;
+
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int screenWidth = (int) screenSize.getWidth();
         int screenHeight = (int) screenSize.getHeight();
@@ -50,7 +52,7 @@ public final class DriverFactory {
         prefsMap.put("profile.default_content_settings.popups", 0);
         prefsMap.put("download.default_directory", downloadFilepath);
         prefsMap.put("intl.accept_languages", "en, en_US");
-
+        WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
 //        options.setBinary("D:\\Users\\AleksanDR\\IdeaProjects\\md\\frontend\\chrome\\win64-116.0.5845.96\\chrome-win64\\chrome.exe");
         options.setExperimentalOption("prefs", prefsMap);
