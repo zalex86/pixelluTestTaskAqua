@@ -1,9 +1,9 @@
 package com.pixellu.tests;
 
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Selenide;
+import com.pixellu.helpers.PageObjectUtils;
 import com.pixellu.pages.MainPage;
-import com.pixellu.pages.SmartslidesPage;
+import com.pixellu.pages.PixelluSmartslidesPage;
 import org.testng.annotations.Test;
 
 import static com.codeborne.selenide.Selenide.open;
@@ -27,18 +27,17 @@ public class LoginTests extends BaseSetup {
     public void loginWithEmailAndPassword() {
         login = "ta_interview@pixellu.com";
         password = "ta_interview";
-open("https://www.pixellu.com/smartslides/");
-        MainPage mainPage = new MainPage();
-        mainPage.acceptCookies()
+        new MainPage();
+        PageObjectUtils.waitPageIsPresentByURL(SERVER);
+        open("https://www.pixellu.com/smartslides/");
+        MainPage mainPage = new PixelluSmartslidesPage();
+        mainPage
                 .clickLoginButton()
                 .sendEmail(login)
                 .clickContinueButton()
                 .sendPassword(password)
-                .clickOnSubmitButton()
-                .clickOnGetStart();
-        Selenide.switchTo().window(2);
-        new SmartslidesPage().createNewSlideShow.shouldBe(Condition.visible);
-
+                .clickOnLoginButton()
+                .clickOnGetStarted()
+                .createNewSlideShow.shouldBe(Condition.visible);
     }
-
 }

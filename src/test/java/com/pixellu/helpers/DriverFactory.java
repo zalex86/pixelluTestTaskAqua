@@ -1,7 +1,6 @@
 package com.pixellu.helpers;
 
 import com.codeborne.selenide.Configuration;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
@@ -20,8 +19,8 @@ public final class DriverFactory {
     public static void setUpDriver() {
 //        Configuration.remote = ParametersProvider.getProperty("seleniumUrl");
         Configuration.browser = System.getProperty("gridBrowserName");
-//        System.setProperty("webdriver.chrome.driver",
-//                "D:\\Users\\AleksanDR\\IdeaProjects\\md\\frontend2\\chrome\\chromedriver-win64\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver",
+                "D:\\Users\\AleksanDR\\AquaProjects\\sobes\\pixellu\\chrome\\chromedriver-win64\\chromedriver.exe");
 //        Configuration.startMaximized = true;
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -52,7 +51,7 @@ public final class DriverFactory {
         prefsMap.put("profile.default_content_settings.popups", 0);
         prefsMap.put("download.default_directory", downloadFilepath);
         prefsMap.put("intl.accept_languages", "en, en_US");
-        WebDriverManager.chromedriver().setup();
+
         ChromeOptions options = new ChromeOptions();
 //        options.setBinary("D:\\Users\\AleksanDR\\IdeaProjects\\md\\frontend\\chrome\\win64-116.0.5845.96\\chrome-win64\\chrome.exe");
         options.setExperimentalOption("prefs", prefsMap);
@@ -61,11 +60,12 @@ public final class DriverFactory {
         options.addArguments("disable-infobars");
         options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--no-sandbox");
-
+        //options.addArguments("--lang=ru-RU");   Не работало только с этим параметром
+        //Timed out receiving message from renderer
         options.addArguments("--disable-gpu");
         options.addArguments("--disable-password-manager");
         options.addArguments("--remote-allow-origins=*");
-
+//        WebDriverManager.chromedriver().setup();
         DesiredCapabilities capabilities = new DesiredCapabilities();
         //show browser window during tests
 //        capabilities.setCapability("enableVNC", true);

@@ -13,17 +13,16 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import com.pixellu.helpers.TimeOuts;
 
 import java.time.Duration;
 import java.util.Objects;
 import java.util.logging.Level;
 
-import static com.pixellu.tests.BaseSetup.LOGGER;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
+import static com.pixellu.tests.BaseSetup.LOGGER;
 
 public final class Waiters {
-    public static Duration EXPLICIT_TIMEOUT = Duration.ofSeconds(60);
+    public static int EXPLICIT_TIMEOUT = 60;
 
     @Step("Wait angular ready")
     public static void waitUntilAngularReady() {
@@ -40,7 +39,7 @@ public final class Waiters {
         wait.until(ExpectedConditions.visibilityOfElementLocated(element));
     }
 
-    public static void waitElementVisibility(By element, Duration timeoutInSeconds){
+    public static void waitElementVisibility(By element, int timeoutInSeconds){
         WebDriver driver = getWebDriver();
         WebDriverWait wait = new WebDriverWait(driver, timeoutInSeconds);
         wait.until(ExpectedConditions.visibilityOfElementLocated(element));
@@ -63,7 +62,7 @@ public final class Waiters {
     }
 
     public static void waitListIsLoad(By elementBy) {
-        long timeoutExpired = System.currentTimeMillis() + TimeOuts.ELEMENT_LOAD_TIMEOUT_MS.getValue().toMillis();
+        long timeoutExpired = System.currentTimeMillis() + TimeOuts.ELEMENT_LOAD_TIMEOUT_MS.getValue();
         while (getWebDriver().findElements(elementBy).isEmpty()) {
             long wait = timeoutExpired - System.currentTimeMillis();
             if (wait <= 0) {
@@ -74,7 +73,7 @@ public final class Waiters {
     }
 
     public static void waitListIsLoad(By elementBy, int listElementsCount) {
-        long timeoutExpired = System.currentTimeMillis() + TimeOuts.ELEMENT_LOAD_TIMEOUT_MS.getValue().toMillis();
+        long timeoutExpired = System.currentTimeMillis() + TimeOuts.ELEMENT_LOAD_TIMEOUT_MS.getValue();
         while (getWebDriver().findElements(elementBy).size() != listElementsCount) {
             long wait = timeoutExpired - System.currentTimeMillis();
             if (wait <= 0) {
@@ -103,7 +102,7 @@ public final class Waiters {
     }
 
     public static void waitElementTextEquals(By elementBy, String text) {
-        long timeoutExpired = System.currentTimeMillis() + TimeOuts.ELEMENT_LOAD_TIMEOUT_MS.getValue().toMillis();
+        long timeoutExpired = System.currentTimeMillis() + TimeOuts.ELEMENT_LOAD_TIMEOUT_MS.getValue();
         while (!getWebDriver().findElement(elementBy).getText().equals(text)) {
             long wait = timeoutExpired - System.currentTimeMillis();
             if (wait <= 0) {
@@ -114,7 +113,7 @@ public final class Waiters {
     }
 
     public static void waitElementTextEquals(SelenideElement element, String text) {
-        long timeoutExpired = System.currentTimeMillis() + TimeOuts.ELEMENT_LOAD_TIMEOUT_MS.getValue().toMillis();
+        long timeoutExpired = System.currentTimeMillis() + TimeOuts.ELEMENT_LOAD_TIMEOUT_MS.getValue();
         while (!element.getText().equals(text)) {
             long wait = timeoutExpired - System.currentTimeMillis();
             if (wait <= 0) {
@@ -125,7 +124,7 @@ public final class Waiters {
     }
 
     public static void waitElementTextNotEmpty(SelenideElement element) {
-        long timeoutExpired = System.currentTimeMillis() + TimeOuts.ELEMENT_LOAD_TIMEOUT_MS.getValue().toMillis();
+        long timeoutExpired = System.currentTimeMillis() + TimeOuts.ELEMENT_LOAD_TIMEOUT_MS.getValue();
         while (element.getText().equals("")) {
             long wait = timeoutExpired - System.currentTimeMillis();
             if (wait <= 0) {
@@ -137,7 +136,7 @@ public final class Waiters {
 
     public static void waitAttributeContainText(SelenideElement element, String attribute,
                                                 String textInAttribute) {
-        long timeoutExpired = System.currentTimeMillis() + TimeOuts.ELEMENT_LOAD_TIMEOUT_MS.getValue().toMillis();
+        long timeoutExpired = System.currentTimeMillis() + TimeOuts.ELEMENT_LOAD_TIMEOUT_MS.getValue();
         while (!Objects.requireNonNull(element.getAttribute(attribute)).contains(textInAttribute)) {
             long wait = timeoutExpired - System.currentTimeMillis();
             if (wait <= 0) {
@@ -149,7 +148,7 @@ public final class Waiters {
     }
 
     public static void waitAttributeNotContainText(SelenideElement element, String attribute, String textInAttribute) {
-        long timeoutExpired = System.currentTimeMillis() + TimeOuts.ELEMENT_LOAD_TIMEOUT_MS.getValue().toMillis();
+        long timeoutExpired = System.currentTimeMillis() + TimeOuts.ELEMENT_LOAD_TIMEOUT_MS.getValue();
         while (Objects.requireNonNull(element.getAttribute(attribute)).contains(textInAttribute)) {
             long wait = timeoutExpired - System.currentTimeMillis();
             if (wait <= 0) {
@@ -161,7 +160,7 @@ public final class Waiters {
     }
 
     public static void waitAttributeDisappear(SelenideElement element, String attribute) {
-        long timeoutExpired = System.currentTimeMillis() + TimeOuts.ELEMENT_LOAD_TIMEOUT_MS.getValue().toMillis();
+        long timeoutExpired = System.currentTimeMillis() + TimeOuts.ELEMENT_LOAD_TIMEOUT_MS.getValue();
         while (element.getAttribute(attribute) != null) {
             long wait = timeoutExpired - System.currentTimeMillis();
             if (wait <= 0) {
@@ -172,7 +171,7 @@ public final class Waiters {
     }
 
     public static void waitValueNotContainText(SelenideElement element, String value) {
-        long timeoutExpired = System.currentTimeMillis() + TimeOuts.ELEMENT_LOAD_VALUE_TIMEOUT_MS.getValue().toMillis();
+        long timeoutExpired = System.currentTimeMillis() + TimeOuts.ELEMENT_LOAD_VALUE_TIMEOUT_MS.getValue();
         while (Objects.equals(element.getValue(), value)) {
             long wait = timeoutExpired - System.currentTimeMillis();
             if (wait <= 0) {
@@ -184,7 +183,7 @@ public final class Waiters {
     }
 
     public static void waitUntilElementNotMove(SelenideElement element) {
-        long timeoutExpired = System.currentTimeMillis() + TimeOuts.ELEMENT_LOAD_TIMEOUT_MS.getValue().toMillis();
+        long timeoutExpired = System.currentTimeMillis() + TimeOuts.ELEMENT_LOAD_TIMEOUT_MS.getValue();
         int x = element.getLocation().x;
         int y = element.getLocation().y;
         sleep(400);
@@ -200,7 +199,7 @@ public final class Waiters {
     }
 
     public static void waitButtonIsActive(SelenideElement button) {
-        long timeoutExpired = System.currentTimeMillis() + TimeOuts.ELEMENT_LOAD_TIMEOUT_MS.getValue().toMillis();
+        long timeoutExpired = System.currentTimeMillis() + TimeOuts.ELEMENT_LOAD_TIMEOUT_MS.getValue();
         while (Objects.requireNonNull(button.getAttribute("class")).contains("md-btn--disabled")) {
             long wait = timeoutExpired - System.currentTimeMillis();
             if (wait <= 0) {
@@ -212,7 +211,7 @@ public final class Waiters {
     }
 
     public static void waitWindowsLoad(int windowsCount){
-        long timeoutExpired = System.currentTimeMillis() + TimeOuts.PAGE_LOAD_TIMEOUT_MS.getValue().toMillis();
+        long timeoutExpired = System.currentTimeMillis() + TimeOuts.PAGE_LOAD_TIMEOUT_MS.getValue();
         while (getWebDriver().getWindowHandles().size() != windowsCount){
             long wait = timeoutExpired - System.currentTimeMillis();
             if (wait <= 0) {
@@ -225,12 +224,12 @@ public final class Waiters {
 
     public static void waitElementVisibleAndDisappear(SelenideElement element){
         try {
-            element.shouldBe(Condition.visible, TimeOuts.SVG_LOADING_MS.getValue());
+            element.shouldBe(Condition.visible, Duration.ofMillis(TimeOuts.SVG_LOADING_MS.getValue()));
         } catch (ElementNotFound | ElementShould e){
             e.printStackTrace();
             return;
         }
-        element.shouldBe(Condition.disappear, TimeOuts.ELEMENT_INVISIBILITY_TIMEOUT_MS.getValue());
+        element.shouldBe(Condition.disappear, Duration.ofMillis(TimeOuts.ELEMENT_INVISIBILITY_TIMEOUT_MS.getValue()));
     }
 
     public static void sleep(Integer milliseconds){

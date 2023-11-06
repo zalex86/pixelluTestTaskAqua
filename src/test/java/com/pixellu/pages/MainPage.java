@@ -3,9 +3,10 @@ package com.pixellu.pages;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
+import com.pixellu.helpers.PageObjectUtils;
 import io.qameta.allure.Step;
 
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.$;
 
 // page_url = https://www.pixellu.com/
 public class MainPage {
@@ -14,6 +15,9 @@ public class MainPage {
     public final SelenideElement headerLoginButton = $("header a[target='_blank']");
 
     public final SelenideElement divPixelluProductsSmartAlbums = $("header div[class='container']");
+    public MainPage() {
+        PageObjectUtils.waitPageIsPresentByURL("https://www.pixellu.com");
+    }
 
     @Step("Accept Cookies")
     public MainPage acceptCookies() {
@@ -23,7 +27,7 @@ public class MainPage {
 
     @Step("Click the 'Login' button in Header")
     public AuthPixelluLoginPage clickLoginButton() {
-        headerLoginButton.shouldBe(Condition.visible).click();
+        headerLoginButton.shouldBe(Condition.visible).hover().click();
         Selenide.switchTo().window(1);
         return new AuthPixelluLoginPage();
     }
