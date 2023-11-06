@@ -3,7 +3,6 @@ package com.pixellu.tests;
 import com.pixellu.helpers.DriverFactory;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.logevents.SelenideLogger;
-import com.pixellu.helpers.EventListener;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -14,10 +13,11 @@ import java.util.logging.Logger;
 
 import static com.codeborne.selenide.Selenide.open;
 
-@Listeners({EventListener.class})
 public class BaseSetup {
-    public static String SERVER = "https://www.pixellu.com/";
+    public static String SERVER;
     public static Logger LOGGER = Logger.getLogger("");
+    public static final String downloadFilepath = "D:\\Users\\AleksanDR\\Downloads\\";//"/tmp/";
+//    public static final String downloadFilepath = "/tmp/";
 
     @BeforeSuite
     public void setupServer() {

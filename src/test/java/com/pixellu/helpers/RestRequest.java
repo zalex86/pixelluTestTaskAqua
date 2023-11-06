@@ -2,6 +2,7 @@ package com.pixellu.helpers;
 
 
 import com.pixellu.api.requests.Credentials;
+import com.pixellu.objects.User;
 import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;

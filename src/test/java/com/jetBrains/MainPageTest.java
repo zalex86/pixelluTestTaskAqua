@@ -1,4 +1,4 @@
-package com.pixellu.tests;
+package com.jetBrains;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
