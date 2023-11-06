@@ -11,7 +11,7 @@ public final class PageObjectUtils {
     private PageObjectUtils() {
     }
 
-    @Step("Ожидание прогрузки страницы {0}")
+    @Step("Wait for the page {0} to load")
     public static void waitPageIsPresentByURL(String pageUrl) {
         new WebDriverWait(WebDriverRunner.getWebDriver(), TimeOuts.PAGE_LOAD_TIMEOUT_S.getValue())
                 .until(ExpectedConditions.urlContains(pageUrl));
